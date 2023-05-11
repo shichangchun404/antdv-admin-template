@@ -64,7 +64,11 @@ const route = useRoute()
 
 const expand = ref(false)
 const formRef = ref<FormInstance>()
-const formState = reactive({})
+
+interface FormItem {
+  [key: string]: any
+}
+const formState = reactive<FormItem>({})
 
 const columns = ref([
   {
