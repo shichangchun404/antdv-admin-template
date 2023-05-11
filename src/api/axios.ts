@@ -1,12 +1,12 @@
-import axios from "axios"
-import type { AxiosInstance, AxiosResponse } from "axios"
+import axios from 'axios'
+import type { AxiosInstance, AxiosResponse } from 'axios'
 import { getToken } from '@/utils/auth'
 
 const instance: AxiosInstance = axios.create({
   timeout: 60 * 1000,
-  headers: { "Authorization": `Bearer ${getToken()}` },
-  baseURL: "/",
-  withCredentials: true,
+  headers: { Authorization: `Bearer ${getToken()}` },
+  baseURL: '/',
+  withCredentials: true
 })
 
 instance.interceptors.request.use(

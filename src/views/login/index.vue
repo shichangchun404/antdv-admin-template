@@ -23,60 +23,51 @@
 
     <a-button type="primary" block @clcik="loginHandler">登 录</a-button> -->
 
-
     <a-form-item
       label="用户名"
       name="username"
       :rules="[{ required: true, message: '请输入用户名' }]"
     >
-      <a-input v-model:value="formState.username" placeholder="请输入用户名"/>
+      <a-input v-model:value="formState.username" placeholder="请输入用户名" />
     </a-form-item>
 
-    <a-form-item
-      label="密 码"
-      name="password"
-      :rules="[{ required: true, message: '请输入密码' }]"
-    >
-      <a-input-password v-model:value="formState.password" placeholder="请输入密码"/>
+    <a-form-item label="密 码" name="password" :rules="[{ required: true, message: '请输入密码' }]">
+      <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
     </a-form-item>
-
 
     <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
       <a-button type="primary" html-type="submit">登录</a-button>
     </a-form-item>
-
-
   </a-form>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 import { login } from '@/api/api.user'
-import { Md5 } from 'ts-md5';
+import { Md5 } from 'ts-md5'
 import { setToken } from '@/utils/auth'
-import { message } from 'ant-design-vue';
+import { message } from 'ant-design-vue'
 
 interface FormState {
-  username: string;
-  password: string;
+  username: string
+  password: string
 }
 
 type LoginResponse = {
   code: number
   message: string
   data?: object
-
 }
 
 const formState = reactive<FormState>({
   username: '',
-  password: '',
-});
+  password: ''
+})
 
-const onFinish = async(userInfo: any) => {
-  console.log('Success:', userInfo);
+const onFinish = async (userInfo: any) => {
+  console.log('Success:', userInfo)
   const { username, password } = userInfo
-  const md5:any = new Md5()
+  const md5: any = new Md5()
   md5.appendAsciiStr(password)
   const cryptPass = md5.end()
   const params = {
@@ -85,27 +76,26 @@ const onFinish = async(userInfo: any) => {
   }
   const data = await login(params)
   // @ts-ignore
-  if(data.code === 20000){
+  if (data.code === 20000) {
     window.location.href = '/home'
     setToken(data.data.token)
-  }else{
+  } else {
     // @ts-ignore
-    message.error(data.message);
+    message.error(data.message)
   }
-};
+}
 
 const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
-
+  console.log('Failed:', errorInfo)
+}
 </script>
 
 <style lang="less">
-.login-wrap{
+.login-wrap {
   width: 300px;
   height: 200px;
   margin: 100px auto;
-  .input{
+  .input {
     margin-bottom: 10px;
   }
 }

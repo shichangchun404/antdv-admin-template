@@ -9,13 +9,13 @@
 </template>
 
 <script setup lang="ts">
-import LayoutHeader from "./components/LayoutHeader.vue"
-import LayoutSider from "./components/LayoutSider.vue"
-import LayoutContent from "./components/LayoutContent.vue"
+import LayoutHeader from './components/LayoutHeader.vue'
+import LayoutSider from './components/LayoutSider.vue'
+import LayoutContent from './components/LayoutContent.vue'
 </script>
 
 <style lang="less" scoped>
-.layout-wrap{
+.layout-wrap {
   height: 100%;
 }
 </style>

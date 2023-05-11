@@ -1,22 +1,15 @@
-import { createRouter, createWebHistory } from "vue-router"
-import type { RouteRecordRaw } from "vue-router"
-import { getUserInfo } from "@/api/api.user"
-import { useUserStore } from "@/store/user"
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
+import { getUserInfo } from '@/api/api.user'
+import { useUserStore } from '@/store/user'
 import base from './modules/base'
 import server from './modules/server'
 import recursion from './modules/recursion'
 
-
-export const menuRoutes: RouteRecordRaw[] = [
-  ...server,
-  ...recursion
-]
+export const menuRoutes: RouteRecordRaw[] = [...server, ...recursion]
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    ...base,
-    ...menuRoutes
-  ]
+  routes: [...base, ...menuRoutes]
 })
 
 /**
@@ -25,9 +18,9 @@ const router = createRouter({
 const wihitList = ['/login']
 router.beforeEach(async (to, from, next) => {
   try {
-    if(wihitList.includes(to.path)){
+    if (wihitList.includes(to.path)) {
       next()
-    }else{
+    } else {
       const data = await getUserInfo()
       const store = useUserStore()
       if (data && data.code === 20000) {
@@ -42,7 +35,6 @@ router.beforeEach(async (to, from, next) => {
   } catch (error) {
     next(`/login?redirect=${to.path}`)
   }
-  
 })
 
 export default router
