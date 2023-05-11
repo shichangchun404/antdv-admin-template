@@ -9,20 +9,6 @@
     @finish="onFinish"
     @finishFailed="onFinishFailed"
   >
-    <!-- <a-input v-model:value="formState.username" placeholder="用户名" class="input">
-        <template #prefix>
-          <UserOutlined />
-        </template>
-      </a-input>
-
-    <a-input-password v-model:value="formState.password" placeholder="密 码" class="input">
-      <template #prefix>
-        <LockOutlined />
-      </template>
-    </a-input-password>
-
-    <a-button type="primary" block @clcik="loginHandler">登 录</a-button> -->
-
     <a-form-item
       label="用户名"
       name="username"
@@ -53,19 +39,12 @@ interface FormState {
   password: string
 }
 
-type LoginResponse = {
-  code: number
-  message: string
-  data?: object
-}
-
 const formState = reactive<FormState>({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 })
 
 const onFinish = async (userInfo: any) => {
-  console.log('Success:', userInfo)
   const { username, password } = userInfo
   const md5: any = new Md5()
   md5.appendAsciiStr(password)
@@ -75,7 +54,6 @@ const onFinish = async (userInfo: any) => {
     password: cryptPass
   }
   const data = await login(params)
-  // @ts-ignore
   if (data.code === 20000) {
     window.location.href = '/home'
     setToken(data.data.token)

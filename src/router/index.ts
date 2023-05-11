@@ -29,11 +29,11 @@ router.beforeEach(async (to, from, next) => {
         store.permission = data.data.permission
         next()
       } else {
-        next(`/login?redirect=${to.path}`)
+        next(`/login`)
       }
     }
   } catch (error) {
-    next(`/login?redirect=${to.path}`)
+    next(`/login`)
   }
 })
 

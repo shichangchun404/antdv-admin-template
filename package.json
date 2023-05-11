@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "home": "https://github.com/shichangchun404/antdv-admin-template",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
