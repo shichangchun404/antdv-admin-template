@@ -92,5 +92,12 @@ const openMenuList = filterRouter(menuRoutes, permission)
     height: '100%';
     border-right: 0;
   }
+  :deep(.ant-layout-sider-trigger) {
+    background-color: #ffffff;
+    border-top: 1px solid #efefef;
+    .anticon svg {
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
 }
 </style>
