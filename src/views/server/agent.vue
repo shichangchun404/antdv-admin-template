@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h4>{{ route.meta.title }}</h4>
     <div class="filter-wrap">
       <a-form
         ref="formRef"
@@ -19,7 +18,9 @@
         <a-row>
           <a-col :span="24" style="text-align: right">
             <a-button style="margin: 0 8px" @click="onResetFields()">重置</a-button>
-            <a-button type="primary" @click="onQuery()">查询</a-button>
+            <a-button type="primary" @click="onQuery()">
+              <template #icon><SearchOutlined /></template>查询</a-button
+            >
           </a-col>
         </a-row>
       </a-form>
@@ -29,8 +30,10 @@
         <a-row>
           <a-col :span="4" style="text-align: left"> Agent列表 </a-col>
           <a-col :span="20" style="text-align: right">
-            <a-button style="margin: 0 8px" @click="onAdd()" type="primary">新增</a-button>
-            <a-button danger @click="onClearCanch()">清除缓存</a-button>
+            <a-button style="margin: 0 8px" @click="onAdd()" type="primary">
+              <template #icon><SearchOutlined /></template>新增</a-button
+            >
+            <a-button danger @click="onClearCanch()" type="primary">清除缓存</a-button>
           </a-col>
         </a-row>
       </div>
@@ -40,7 +43,7 @@
             <a>{{ text }}</a>
           </template>
           <template v-else-if="column.dataIndex === 'operation'">
-            <a-button class="table-btn">编辑</a-button>
+            <a-button class="table-btn" @click="onEdit">编辑</a-button>
             <a-popconfirm v-if="data.length" title="确定删除?" @confirm="onDelete(record.key)">
               <a-button danger>删除</a-button>
             </a-popconfirm>
@@ -48,6 +51,11 @@
         </template>
       </a-table>
     </div>
+    <a-modal v-model:visible="visible" title="新增" @ok="handleOk">
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </a-modal>
   </div>
 </template>
 
@@ -65,7 +73,7 @@ interface FormItem {
 const formState = reactive<FormItem>({
   ip: ''
 })
-
+const visible = ref(false)
 const columns = ref([
   {
     title: 'Name',
@@ -165,12 +173,15 @@ const onResetFields = () => {
   ;(formRef.value as FormInstance).resetFields()
 }
 
-const onAdd = () => {}
+const onAdd = () => {
+  visible.value = true
+}
 const onEdit = (key: string) => {}
 const onDelete = (key: string) => {
   console.log(key)
 }
 const onClearCanch = () => {}
+const handleOk = () => {}
 </script>
 
 <style scoped lang="less"></style>

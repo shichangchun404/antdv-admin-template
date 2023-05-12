@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h4>{{ route.meta.title }}</h4>
     <div class="filter-wrap">
       <a-form
         ref="formRef"
