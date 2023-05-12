@@ -1,6 +1,6 @@
 @color-white: #ffffff;
 @color-black: #000000;
-@color-gray-border: #cccccc;
+@color-gray-border: #e5e7eb;
 
 html,
 body,
@@ -16,9 +16,19 @@ li {
   list-style: none;
 }
 .filter-wrap {
-  padding: 10px 0;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid @color-gray-border;
+  margin-bottom: 20px;
 }
 .content-wrap {
   padding: 20px;
   background: #fff;
+  border: 1px solid @color-gray-border;
+  .operate-wrap {
+    margin-bottom: 10px;
+  }
+  .table-btn {
+    margin-right: 10px;
+  }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>{{ route.meta.title }}</h3>
+    <h4>{{ route.meta.title }}</h4>
     <div class="filter-wrap">
       <a-form
         ref="formRef"
@@ -10,43 +10,40 @@
         @finish="onFinish"
       >
         <a-row :gutter="24">
-          <template v-for="i in 10" :key="i">
-            <a-col v-show="expand || i <= 6" :span="8">
-              <a-form-item
-                :name="`field-${i}`"
-                :label="`field-${i}`"
-                :rules="[{ required: true, message: 'input something' }]"
-              >
-                <a-input
-                  v-model:value="formState[`field-${i}`]"
-                  placeholder="placeholder"
-                ></a-input>
-              </a-form-item>
-            </a-col>
-          </template>
+          <a-col :span="8">
+            <a-form-item name="ip" label="IP">
+              <a-input v-model:value="formState.ip" placeholder="请输入IP"></a-input>
+            </a-form-item>
+          </a-col>
         </a-row>
         <a-row>
           <a-col :span="24" style="text-align: right">
-            <a-button type="primary" html-type="submit">Search</a-button>
-            <a-button style="margin: 0 8px" @click="resetFields()">Clear</a-button>
-            <a style="font-size: 12px" @click="expand = !expand">
-              <template v-if="expand">
-                <UpOutlined />
-              </template>
-              <template v-else>
-                <DownOutlined />
-              </template>
-              Collapse
-            </a>
+            <a-button style="margin: 0 8px" @click="onResetFields()">重置</a-button>
+            <a-button type="primary" @click="onQuery()">查询</a-button>
           </a-col>
         </a-row>
       </a-form>
     </div>
     <div class="content-wrap">
+      <div class="operate-wrap">
+        <a-row>
+          <a-col :span="4" style="text-align: left"> Agent列表 </a-col>
+          <a-col :span="20" style="text-align: right">
+            <a-button style="margin: 0 8px" @click="onAdd()" type="primary">新增</a-button>
+            <a-button danger @click="onClearCanch()">清除缓存</a-button>
+          </a-col>
+        </a-row>
+      </div>
       <a-table :columns="columns" :data-source="data">
-        <template #bodyCell="{ column, text }">
+        <template #bodyCell="{ column, text, record }">
           <template v-if="column.dataIndex === 'name'">
             <a>{{ text }}</a>
+          </template>
+          <template v-else-if="column.dataIndex === 'operation'">
+            <a-button class="table-btn">编辑</a-button>
+            <a-popconfirm v-if="data.length" title="确定删除?" @confirm="onDelete(record.key)">
+              <a-button danger>删除</a-button>
+            </a-popconfirm>
           </template>
         </template>
       </a-table>
@@ -57,18 +54,17 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
-import { UpOutlined, DownOutlined } from '@ant-design/icons-vue'
 import type { FormInstance } from 'ant-design-vue'
 
 const route = useRoute()
-
-const expand = ref(false)
 const formRef = ref<FormInstance>()
 
 interface FormItem {
-  [key: string]: any
+  ip: string
 }
-const formState = reactive<FormItem>({})
+const formState = reactive<FormItem>({
+  ip: ''
+})
 
 const columns = ref([
   {
@@ -105,6 +101,12 @@ const columns = ref([
     dataIndex: 'address',
     key: 'address 4',
     ellipsis: true
+  },
+  {
+    title: '操作',
+    dataIndex: 'operation',
+    fixed: 'right',
+    width: 180
   }
 ])
 
@@ -157,10 +159,18 @@ const onFinish = (values: any) => {
   console.log('Received values of form: ', values)
   console.log('formState: ', formState)
 }
-const resetFields = () => {
-  // @ts-ignore
-  formRef.resetFields()
+
+const onQuery = () => {}
+const onResetFields = () => {
+  ;(formRef.value as FormInstance).resetFields()
 }
+
+const onAdd = () => {}
+const onEdit = (key: string) => {}
+const onDelete = (key: string) => {
+  console.log(key)
+}
+const onClearCanch = () => {}
 </script>
 
 <style scoped lang="less"></style>
