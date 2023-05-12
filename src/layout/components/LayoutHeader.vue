@@ -1,7 +1,7 @@
 <template>
   <a-layout-header class="header">
     <div class="logo">
-      <img src="@/assets/vue.svg" alt="" />
+      <img src="@/assets/images/ytlogo.png" alt="" />
       <h3 class="title">DNS管理平台</h3>
     </div>
     <div class="menu">
@@ -12,14 +12,17 @@
       </a-menu>
 
       <div class="right">
-        <a-badge count="5" :overflow-count="10" class="item"> 未读消息 </a-badge>
+        <a-badge count="555" :overflow-count="10" class="item badge" :offset="[10, -5]">
+          <BellOutlined :style="{ fontSize: '16px' }"></BellOutlined>
+        </a-badge>
         <a-dropdown class="item">
           <a class="ant-dropdown-link" @click.prevent>
+            <img class="user-avatar" src="@/assets/images/ytlogo.png" />
             <span class="username">{{ store.username }}</span>
             <DownOutlined />
           </a>
           <template #overlay>
-            <a-menu>
+            <a-menu class="logout-wrap">
               <a-menu-item>
                 <a href="javascript:;" @click="logout">退出</a>
               </a-menu-item>
@@ -32,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { DownOutlined } from '@ant-design/icons-vue'
+import { DownOutlined, BellOutlined } from '@ant-design/icons-vue'
 import { useUserStore } from '@/store/user'
 import { removeToken } from '@/utils/auth'
 
@@ -47,6 +50,7 @@ const logout = () => {
 .header {
   background: #fff;
   cursor: pointer;
+  border-bottom: 1px solid @color-gray-border;
   .logo {
     float: left;
     width: 200px;
@@ -65,16 +69,23 @@ const logout = () => {
     justify-content: space-between;
     margin-right: 20px;
     .left {
-      line-height: 64px;
+      border-bottom: 1px solid @color-gray-border;
     }
     .right {
       .item {
-        margin-left: 20px;
-        .username {
-          padding-right: 5px;
-        }
+        margin: 0 20px;
+      }
+      .user-avatar {
+        width: 30px;
+        border-radius: 15px;
+      }
+      .username {
+        padding: 5px;
       }
     }
   }
+}
+.logout-wrap {
+  margin-top: 20px;
 }
 </style>

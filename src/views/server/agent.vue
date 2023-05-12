@@ -18,9 +18,7 @@
         <a-row>
           <a-col :span="24" style="text-align: right">
             <a-button style="margin: 0 8px" @click="onResetFields()">重置</a-button>
-            <a-button type="primary" @click="onQuery()">
-              <template #icon><SearchOutlined /></template>查询</a-button
-            >
+            <a-button type="primary" @click="onQuery()"> 查询</a-button>
           </a-col>
         </a-row>
       </a-form>
@@ -30,9 +28,7 @@
         <a-row>
           <a-col :span="4" style="text-align: left"> Agent列表 </a-col>
           <a-col :span="20" style="text-align: right">
-            <a-button style="margin: 0 8px" @click="onAdd()" type="primary">
-              <template #icon><SearchOutlined /></template>新增</a-button
-            >
+            <a-button style="margin: 0 8px" @click="onAdd()" type="primary"> 新增</a-button>
             <a-button danger @click="onClearCanch()" type="primary">清除缓存</a-button>
           </a-col>
         </a-row>
@@ -43,9 +39,9 @@
             <a>{{ text }}</a>
           </template>
           <template v-else-if="column.dataIndex === 'operation'">
-            <a-button class="table-btn" @click="onEdit">编辑</a-button>
+            <a-button type="link" @click="onEdit">编辑</a-button>
             <a-popconfirm v-if="data.length" title="确定删除?" @confirm="onDelete(record.key)">
-              <a-button danger>删除</a-button>
+              <a-button danger type="link">删除</a-button>
             </a-popconfirm>
           </template>
         </template>
@@ -114,7 +110,7 @@ const columns = ref([
     title: '操作',
     dataIndex: 'operation',
     fixed: 'right',
-    width: 180
+    width: 160
   }
 ])
 
