@@ -1,34 +1,45 @@
 <template>
-  <a-form
-    class="login-wrap"
-    :model="formState"
-    name="basic"
-    :label-col="{ span: 8 }"
-    :wrapper-col="{ span: 16 }"
-    autocomplete="off"
-    @finish="onFinish"
-    @finishFailed="onFinishFailed"
-  >
-    <a-form-item
-      label="用户名"
-      name="username"
-      :rules="[{ required: true, message: '请输入用户名' }]"
+  <div class="login-wrap">
+    <a-form
+      :model="formState"
+      name="normal_login"
+      class="login-form"
+      @finish="onFinish"
+      @finishFailed="onFinishFailed"
     >
-      <a-input v-model:value="formState.username" placeholder="请输入用户名" />
-    </a-form-item>
+      <a-form-item>
+        <h3 class="title">登 录</h3>
+      </a-form-item>
+      <a-form-item
+        label=""
+        name="username"
+        :rules="[{ required: true, message: '请输入用户名！' }]"
+      >
+        <a-input v-model:value="formState.username">
+          <template #prefix>
+            <UserOutlined class="site-form-item-icon" />
+          </template>
+        </a-input>
+      </a-form-item>
 
-    <a-form-item label="密 码" name="password" :rules="[{ required: true, message: '请输入密码' }]">
-      <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
-    </a-form-item>
+      <a-form-item label="" name="password" :rules="[{ required: true, message: '请输入密码！' }]">
+        <a-input-password v-model:value="formState.password">
+          <template #prefix>
+            <LockOutlined class="site-form-item-icon" />
+          </template>
+        </a-input-password>
+      </a-form-item>
 
-    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-      <a-button type="primary" html-type="submit">登录</a-button>
-    </a-form-item>
-  </a-form>
+      <a-form-item>
+        <a-button type="primary" html-type="submit" class="login-form-button"> 登 录 </a-button>
+      </a-form-item>
+    </a-form>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { login } from '@/api/api.user'
 import { Md5 } from 'ts-md5'
 import { setToken } from '@/utils/auth'
@@ -70,11 +81,17 @@ const onFinishFailed = (errorInfo: any) => {
 
 <style lang="less">
 .login-wrap {
-  width: 300px;
-  height: 200px;
+  width: 500px;
+  height: 300px;
   margin: 100px auto;
-  .input {
-    margin-bottom: 10px;
+  padding: 40px;
+  border: 1px solid @color-gray-border;
+  border-radius: 5px;
+  .title {
+    font-weight: 600;
+  }
+  .login-form-button {
+    width: 100%;
   }
 }
 </style>
