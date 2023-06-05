@@ -2,11 +2,6 @@ interface IGetListFun {
   <T>(data: any): Promise<T>
 }
 
-// interface IPageResult<T> {
-//   list: T
-//   total: number
-// }
-
 interface IStrategyViewItem {
   viewName: string
   total: number

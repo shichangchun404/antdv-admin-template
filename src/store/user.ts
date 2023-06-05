@@ -12,7 +12,6 @@ interface UserState {
   userInfo: Nullable<UserInfo>
   token?: string
   permissionList: PermissionEnum[]
-  // roleList: RoleEnum[];
   sessionTimeout?: boolean
   lastUpdateTime?: number
 }
