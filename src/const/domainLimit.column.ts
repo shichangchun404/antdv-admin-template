@@ -6,7 +6,7 @@ export const columnList = [
     fixed: 'left'
   },
   {
-    title: '策列描述',
+    title: '描述',
     dataIndex: 'desc',
     width: 120,
     fixed: 'left'
@@ -15,11 +15,6 @@ export const columnList = [
     title: '域名',
     dataIndex: 'domain',
     width: 150
-  },
-  {
-    title: '最大QPS',
-    dataIndex: 'maxQPS',
-    width: 100
   },
   {
     title: '状态',

@@ -10,32 +10,34 @@ export const allList = [{ label: '全部', value: null }]
 export const originList = [
   { label: '全部', value: null },
   { label: '本地', value: 'local' },
-  { label: 'DRMS', value: 'drms' },
-  { label: 'IMSM', value: 'isms' },
-  { label: 'RMSM', value: 'rsms' }
+  { label: 'AAA', value: 'aaa' },
+  { label: 'BBB', value: 'bbb' },
+  { label: 'CCC', value: 'ccc' }
 ]
 
 // 转发匹配类型
 export const matchTypeList = [
-  { label: 'name', value: 'name' },
-  { label: 'subzone', value: 'subzone' },
-  { label: 'domain', value: 'domain' }
+  { label: 'AAA', value: 'aaa' },
+  { label: 'BBB', value: 'bbb' },
+  { label: 'CCC', value: 'ccc' }
 ]
-export const defaultMatchType = 'name'
+export const defaultMatchType = 'aaa'
 
 // 转发类型
 export const transTypeList = [
-  { label: 'only', value: 'only' },
-  { label: 'first', value: 'first' }
+  { label: 'AAA', value: 'aaa' },
+  { label: 'BBB', value: 'bbb' },
+  { label: 'CCC', value: 'ccc' }
 ]
-export const defaulTtransType = 'only'
+export const defaulTtransType = 'aaa'
 
 export const globalView = '全局视图'
 export const dateFormat = 'YYYY-MM-DD hh:mm:ss'
 
 export const forceTypeList = [
-  { label: 'A/AAAA', value: 'A/AAAA' },
-  { label: 'stop', value: 'stop' }
+  { label: 'AAA', value: 'aaa' },
+  { label: 'BBB', value: 'bbb' },
+  { label: 'CCC', value: 'ccc' }
 ]
 export const defaultForceType = 'A/AAAA'
 
