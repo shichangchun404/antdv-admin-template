@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import path from 'path'
 import vue from '@vitejs/plugin-vue'
+import mockDevServerPlugin from 'vite-plugin-mock-dev-server'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,38 +28,31 @@ export default defineConfig({
     }
   },
 
-  plugins: [vue()],
+  plugins: [vue(), mockDevServerPlugin()],
 
   css: {
     preprocessorOptions: {
       less: {
-        charset: false,
-        additionalData: '@import "./src/assets/less/global.less";'
+        globalVars: {
+          'color-white': '#ffffff',
+          'color-black': '#000000',
+          'color-gray-border': '#e5e7eb',
+          'color-gray-bg': '#f0f2f5',
+          'color-link': '#1890ff'
+        }
+        // additionalData: '@import (reference) "./src/assets/less/global.less";'
       }
     }
   },
 
   build: {
     sourcemap: false,
-    minify: 'terser',
     chunkSizeWarningLimit: 1500,
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return id.toString().split('node_modules/')[1].split('/')[0].toString()
-          }
-        },
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : []
-          const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]'
-          return `js/${fileName}/[name].[hash].js`
+        manualChunks: {
+          vue: ['vue', 'vue-router', 'pinia'],
+          'ant-design': ['ant-design-vue', '@ant-design/icons-vue']
         }
       }
     }

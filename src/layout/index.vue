@@ -7,8 +7,10 @@
         <!-- <RouterView></RouterView> -->
         <RouterView>
           <template #default="{ Component, route }">
-            <transition name="slide-fade" mode="out-in" appear @enter="onEnter">
-              <component :is="Component" :key="route.fullPath" />
+            <transition name="slide-fade" mode="out-in" appear>
+              <div>
+                <component :is="Component" :key="route.fullPath" />
+              </div>
             </transition>
           </template>
         </RouterView>
@@ -20,10 +22,6 @@
 <script setup lang="ts">
 import LayoutHeader from './components/LayoutHeader.vue'
 import LayoutSider from './components/LayoutSider.vue'
-
-const onEnter = () => {
-  console.log('onEnter >>>>>>>>>>>>>>> ')
-}
 </script>
 
 <style lang="less">

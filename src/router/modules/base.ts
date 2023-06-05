@@ -7,7 +7,8 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/layout/index.vue'),
     children: [
       {
-        path: 'home',
+        path: '/home',
+        name: 'home',
         component: () => import('@/views/home/index.vue'),
         meta: {
           title: '首页'
@@ -22,7 +23,15 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '登录'
     }
-  }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/404/index.vue'),
+    meta: {
+      title: '页面不存在'
+    }
+  },
 ]
 
 export default routes

@@ -45,11 +45,14 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import { notification, message } from 'ant-design-vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-import { login } from '@/api/api.user'
 import { Md5 } from 'ts-md5'
-import { setToken } from '@/utils/auth'
-import { message } from 'ant-design-vue'
+import { useUserStore } from '@/store/user'
+import router from '@/router'
+import { PageEnum } from '@/enum/pageEnum'
+
+const userStore = useUserStore()
 
 interface FormState {
   username: string
@@ -70,13 +73,17 @@ const onFinish = async (userInfo: any) => {
     username,
     password: cryptPass
   }
-  const data = await login(params)
-  if (data.code === 20000) {
-    window.location.href = '/home'
-    setToken(data.data.token)
-  } else {
-    // @ts-ignore
-    message.error(data.message)
+  try {
+    const userInfo = await userStore.login(params)
+    await router.replace(userInfo?.homePath || PageEnum.BASE_HOME)
+    if (userInfo) {
+      notification.open({
+        message: '登录成功',
+        description: `欢迎回来 ${userInfo.username}`
+      })
+    }
+  } catch (error) {
+    message.error((error as unknown as Error).message)
   }
 }
 

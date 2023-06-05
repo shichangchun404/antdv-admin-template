@@ -1,22 +1,22 @@
 import axios from '@/api/axios'
-import { getToken } from '@/utils/auth'
+import { UserInfo } from '@/store/user'
 
 export const login = (data: any) => {
   // return axios.post('/api/v1/auth/login', data)
   return Promise.resolve({
-    code: 20000,
-    data: { token: 'tokenxxxxx' }
+    token: 'tokenxxxxx'
   })
 }
 
-export const getUserInfo = (): any => {
+export const getUserInfo = (): Promise<UserInfo> => {
   // return axios.get('/api/v1/user/info')
   return Promise.resolve({
-    code: getToken() ? 20000 : -1,
-    data: {
-      username: 'admin',
-      nickname: 'admin_nick',
-      permission: ['read_server']
-    }
+    userId: 10000,
+    username: 'admin',
+    permission: ['read_server'] as any
   })
+}
+
+export function logout() {
+  return Promise.resolve({})
 }

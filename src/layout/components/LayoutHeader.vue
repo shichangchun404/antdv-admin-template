@@ -1,8 +1,8 @@
 <template>
   <a-layout-header class="header">
     <div class="logo">
-      <img src="@/assets/images/ytlogo.png" alt="" />
-      <h3 class="title">DNS管理平台</h3>
+      <img src="@/assets/images/logo.png" alt="" />
+      <h3 class="title">运营管理平台</h3>
     </div>
     <div class="menu">
       <a-menu class="left" mode="horizontal">
@@ -17,8 +17,8 @@
         </a-badge>
         <a-dropdown class="item">
           <a class="ant-dropdown-link" @click.prevent>
-            <img class="user-avatar" src="@/assets/images/ytlogo.png" />
-            <span class="username">{{ store.username }}</span>
+            <img class="user-avatar" src="@/assets/images/logo.png" />
+            <span class="username">{{ store.userInfo?.username }}</span>
             <DownOutlined />
           </a>
           <template #overlay>
@@ -37,12 +37,10 @@
 <script setup lang="ts">
 import { DownOutlined, BellOutlined } from '@ant-design/icons-vue'
 import { useUserStore } from '@/store/user'
-import { removeToken } from '@/utils/auth'
 
 const store = useUserStore()
 const logout = () => {
-  removeToken()
-  window.location.href = '/login'
+  store.logout(true)
 }
 </script>
 
@@ -51,6 +49,7 @@ const logout = () => {
   background: #fff;
   cursor: pointer;
   border-bottom: 1px solid @color-gray-border;
+  padding: 0 0;
   .logo {
     float: left;
     width: 200px;
