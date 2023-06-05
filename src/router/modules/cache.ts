@@ -28,15 +28,23 @@ const routes: RouteRecordRaw = {
             icon: ApartmentOutlined
           }
         },
-
         {
-          path: 'domain-limit-detail',
+          path: 'ip-limit',
+          name: 'ip-limit',
+          component: () => import('@/views/cache/strategy/domain-limit.vue'),
+          meta: {
+            title: 'IP限速',
+            icon: ApartmentOutlined
+          }
+        },
+        {
+          path: 'domain-limit/:id',
           name: 'domain-limit-detail',
           component: () => import('@/views/cache/strategy/detail.vue'),
           meta: {
             title: '域名限速详情',
             icon: ApartmentOutlined,
-            activiteMenu: 'domain-limit',
+            activateMenu: 'domain-limit',
             hide: true
           }
         }

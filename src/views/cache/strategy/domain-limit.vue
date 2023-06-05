@@ -84,6 +84,7 @@
                   @click="onOperate(OperateEnum.SUBMIT, record)"
                   >下发</a-button
                 >
+                <a-button type="link" @click="gotoDetail(record.id)">详情</a-button>
               </template>
             </template>
           </a-table>
@@ -119,6 +120,7 @@ import BatchOperateModal from '@/components/BatchOperateModal.vue'
 import CreateOrUpdateModal from '../components/DomainLimitCreateModal.vue'
 import { columnList } from '@/const/domainLimit.column'
 import { getList, postDelete, postManage } from '@/api/domainLimit.api'
+import { useRouter } from 'vue-router'
 
 const searchParam = reactive({
   domian: '',
@@ -149,6 +151,11 @@ const {
   onOperate,
   onPagerChange
 } = useStrategyList(searchParam, getList, getViewList, postDelete, postManage)
+
+const router = useRouter()
+const gotoDetail = (id: string) => {
+  window.location.href = `domain-limit/${id}`
+}
 
 onMounted(() => {
   getViewData()
